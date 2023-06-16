@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Web</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="balance">
+            <span class="totalBal">
+                Total Balance
+            </span>
+            <span class="totalBalVal">
+                $000.00
+            </span>
+            <div class="results">
+                <div>
+                    <div class="resultType">
+                        <ion-icon class="up" name="arrow-up-outline"></ion-icon>
+                        <!-- <ion-icon name="arrow-down-outline"></ion-icon> -->
+                        <span class="resultTitle">Income</span>
+                    </div>
+                    <span class="incomeValue">
+                        $000.00
+                    </span>
+                </div>
+                <div>
+                    <div class="resultType">
+                        <ion-icon class="down" name="arrow-down-outline"></ion-icon>
+                        <!-- <ion-icon name="arrow-down-outline"></ion-icon> -->
+                        <span class="resultTitle">Expense</span>
+                    </div>
+                    <span class="expenseValue">
+                        $000.00
+                    </span>
+                </div>
+            </div>
+        </div>
+        <progress class="progress" value="3333" max="10000">
+        </progress>
+        <div class="addButtons">
+            <button onclick="showProduct()" class="addIncome">Add Income</button>
+            <button onclick="showAmmount()" class="addExpense">Add Expense</button>
+        </div>
+        <div class="productInter hide">
+            <span type="button" onclick="closeInterface()" class="close">&times</span>
+            <input type="text" name="" id="" class="productName" placeholder="Tên thu nhập">
+            <input type="text" name="" id="" class="productType" placeholder="Mô tả ">
+            <input type="number" name="" id="" class="productCost" placeholder="Giá trị">
+            <button onclick="addProducts()" class="addProduct">Add Income</button>
+            <button class="updateProduct">Update Income</button>
+        </div>
+        <div class="ammountInter hide">
+            <span type="button" onclick="closeInterface()" class="close">&times</span>
+            <input type="text" name="" id="" class="incomeName" placeholder="Tên chi phí">
+            <input type="text" name="" id="" class="incomeType" placeholder="Mô tả">
+            <input type="number" name="" id="" class="incomeAmmount" placeholder="Giá trị">
+            <button onclick="addAmmounts()" class="addAmmount">Add Expense</button>
+            <button class="updateAmmount">Update Expense</button>
+        </div>
+        <div class="deleteInter">
+            <div class="confirm">
+                <ion-icon name="warning-outline" class="warningIcon"></ion-icon>
+                <span class="warningHeading">Confirm</span>
+            </div>
+            <div class="warningMessage">
+            </div>
+            <div class="deleteActions">
+                <button onclick="deletetrans()" class="deleteNow">
+                    Xoá
+                </button>
+                <button onclick="hideDelete()" class="cancelNow">
+                    Trở về
+                </button>
+            </div>
+        </div>
+        <div class="translist">
+            <div class="trans">
+                <div class="item">
+                    <div class="iconDetails">
+                        <ion-icon name="cash-outline" class="transIcon"></ion-icon>
+                        <div class="itemDetails">
+                            <span class="itemName ">Cong viec 1 </span>
+                            <span class="itemType ">Mô tả công việc</span>
+                        </div>
+                    </div>
+                    <div class="iconDetails  itemDate">
+                        <span class="itemPrice">$5000 </span>
+
+                        <span class="itemTime">27/09/2002</span>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button class="edit">
+                        <ion-icon name="create-outline" class="actionIcon"></ion-icon>
+                        <span class="editTitle">Edit</span>
+                    </button>
+                    <button class="delete">
+                        <ion-icon name="trash-outline"></ion-icon>
+                        <span class="deleteTitle">Delete</span>
+                    </button>
+                </div>
+            </div>
+            <div class="trans">
+                <div class="item">
+                    <div class="iconDetails">
+                        <ion-icon name="cash-outline" class="transIcon"></ion-icon>
+                        <div class="itemDetails">
+                            <span class="itemName ">Công việc 2</span>
+                            <span class="itemType ">Mô tả công việc</span>
+                        </div>
+                    </div>
+                    <div class="iconDetails itemDate">
+                        <span class="itemPrice">$500</span>
+
+                        <span class="itemTime">27/39/2002</span>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button class="edit">
+                        <ion-icon name="create-outline" class="actionIcon"></ion-icon>
+                        <span class="editTitle">Edit</span>
+                    </button>
+                    <button class="delete">
+                        <ion-icon name="trash-outline"></ion-icon>
+                        <span class="deleteTitle">Delete</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="snackBar ">
+        All Fields Are Required
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="script.js"></script>
+</body>
+<!-- Script for icon -->
+
+
+</html>

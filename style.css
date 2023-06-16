@@ -1,0 +1,565 @@
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: linear-gradient(135deg,
+            #2b5876, #4e4376);
+    --secondary-color: linear-gradient(135deg, #E62B22, #EB5F22);
+    --th3--color: linear-gradient(135deg, #dd3e54, #6be585);
+    --dola-color: rgb(51, 237, 9)
+}
+
+html {
+    /* font-size: 62.5%; */
+    font-family: sans-serif;
+}
+
+
+body {
+    background: var(--primary-color);
+    min-height: 100vh;
+    padding: 5em 1em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    padding: 1em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgb(0, 0, 0, 0.3);
+}
+
+.balance {
+    background: var(--primary-color);
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    box-shadow: 0px 1px 2px rgb(0, 0, 0, 0.3);
+}
+
+.totalBal {
+    color: white;
+    font-size: 1.2rem;
+    margin: 0.5em 0em;
+}
+
+.totalBalVal {
+    color: white;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-left: 0.5em;
+}
+
+.results {
+    background-color: var(--primary-color);
+    width: 100%;
+    padding: 1em;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.up,
+.down {
+    font-size: 1rem;
+    font-weight: 900;
+    color: greenyellow;
+    margin-bottom: -0.1em;
+    margin-right: -0.2em;
+}
+
+.down {
+    color: orangered;
+}
+
+.resultType {
+    margin-bottom: 0.5em;
+}
+
+.resultTitle {
+    color: white;
+}
+
+.incomeValue,
+.expenseValue {
+    font-size: 1.4rem;
+    color: white;
+}
+
+/* 
+css progress */
+progress {
+    border-radius: 5px;
+    width: 100%;
+    height: 1em;
+    margin-top: 1em;
+}
+
+progress::-webkit-progress-bar {
+    background: var(--primary-color);
+    border-radius: 5px;
+}
+
+progress::-webkit-progress-value {
+    background: var(--secondary-color);
+    border-radius: 5px;
+}
+
+.addButtons {
+    margin-top: 0.1em;
+    margin-bottom: 1em;
+
+}
+
+.addIncome,
+.addExpense,
+.addProduct,
+.updateProduct,
+.addAmmount,
+.updateAmmount {
+    /* background: var(--primary-color); */
+    color: white;
+    outline: none;
+    border: none;
+    padding: 0.5em;
+    border-radius: 5px;
+    width: 100%;
+    font-weight: 700;
+    margin-top: 0.5em;
+    cursor: pointer;
+}
+
+.addProduct,
+.updateProduct,
+.addAmmount,
+.updateAmmount {
+    margin-top: 0;
+}
+
+.addIncome,
+.addProduct,
+.updateProduct {
+    background: var(--primary-color);
+}
+
+.addExpense,
+.addAmmount,
+.updateAmmount {
+    background: var(--secondary-color);
+}
+
+.productInter,
+.ammountInter {
+    padding: 1em;
+    border-radius: 10px;
+    width: 100%;
+    box-shadow: 0px 2px 4px rgb(0, 0, 0, 0.3);
+}
+
+.close {
+    color: #AAAAAA;
+    float: right;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.productName,
+.productType,
+.productCost,
+.incomeName,
+.incomeType,
+.incomeAmmount {
+    width: 100%;
+    margin-bottom: 1em;
+    height: 30px;
+    padding: 1em;
+    font-size: 1rem;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid gainsboro;
+}
+
+
+.hide {
+    display: none;
+}
+
+.deleteInter {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 0.5em;
+    border-radius: 10px;
+    width: 100%;
+    box-shadow: 0px 2px 4px rgb(0, 0, 0, 0.3);
+    display: none;
+
+}
+
+.warningIcon {
+    font-size: 2rem;
+    background: var(--secondary-color);
+    color: white;
+    border-radius: 5px;
+    /* margin-bottom: 0.5em; */
+}
+
+.warningHeading {
+    font-size: 2em;
+}
+
+.warningMessage {
+    text-align: center;
+    margin: 0.5em 0em;
+}
+
+.deleteActions {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin: 0.5em 0em;
+}
+
+.deleteNow,
+.cancelNow {
+    outline: none;
+    border: none;
+    background: var(--primary-color);
+    color: white;
+    padding: 0.5em 0.5em;
+    border-radius: 5px;
+    width: 40%;
+    cursor: pointer;
+}
+
+.deleteNow {
+    background: var(--secondary-color);
+}
+
+.trans {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    margin-top: 2em;
+    box-shadow: 0px 1px 2px rgb(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+.iconDetails {
+    display: flex;
+
+}
+
+.transIcon {
+    font-size: 1.6rem;
+    background: var(--primary-color);
+    color: white;
+    padding: 0.3em;
+    border-radius: 5px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.itemDetails {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0.5em;
+}
+
+.itemDate {
+    flex-direction: column;
+}
+
+.itemName,
+.itemPrice {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5em;
+}
+
+.itemPrice {
+    padding-right: 0.5em;
+}
+
+.itemType,
+.itemTime {
+    font-size: 0.8rem;
+}
+
+.itemName,
+.incomeType {
+    text-transform: capitalize;
+}
+
+.itemTime {
+    text-align: right;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5em;
+}
+
+.edit,
+.delete {
+    background: var(--primary-color);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5em;
+    border-radius: 5px;
+    margin-top: 0.5em;
+    width: 20%;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.delete {
+    background: var(--secondary-color);
+}
+
+.editTitle,
+.deleteTitle {
+    font-size: 1rem;
+    color: white;
+    margin-left: 0.4em;
+
+}
+
+.snackBar {
+    visibility: hidden;
+    min-width: 23em;
+    margin-left: -12em;
+    background: var(--secondary-color);
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 5px;
+    padding: 1em;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 1em;
+}
+
+.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 1em;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 1em;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+.noTasks {
+    font-size: 1.6rem;
+}
+
+/* responsive */
+
+@media only screen and(min-width: 400px) {
+    .container {
+        padding: 2em;
+        max-width: 700px;
+    }
+
+    .balance {
+        padding: 2em;
+    }
+
+    .totalBal {
+        font-size: 2rem;
+    }
+
+    .totalBalVal {
+        font-size: 5rem;
+    }
+
+    .results {
+        padding: 2em;
+    }
+
+    .up,
+    .down {
+        font-size: 2rem;
+        margin-left: 0;
+    }
+
+    .resultTitle {
+        font-size: 1.8rem;
+    }
+
+    .incomeValue,
+    .expenseValue {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+    progress {
+        margin-top: 1.5em;
+    }
+
+    .addButtons {
+        margin-top: 0.5em;
+        margin-bottom: 2em;
+    }
+
+    .addIncome,
+    .addExpense {
+        width: 49%;
+        margin-top: 0;
+        padding: 1em;
+        font-size: 1.6rem;
+        font-weight: 700;
+    }
+
+    .addIncome {
+        margin-left: 0.1em;
+    }
+
+    .productInter,
+    .ammountInter {
+        padding: 2em;
+    }
+
+    .close {
+        font-size: 3rem;
+        margin-bottom: 0.5em;
+    }
+
+    .productName,
+    .productType,
+    .productCost,
+    .incomeType,
+    .incomeAmmount {
+        padding: 1em;
+        font-size: 1.6rem;
+    }
+
+    .addAmmount,
+    .addProduct,
+    .updateAmmount,
+    .addProduct {
+        padding: 1em;
+        font-size: 1.6rem;
+    }
+
+    .deleteInter {
+        padding: 1em;
+    }
+
+    .warningIcon {
+        font-size: 3rem;
+        padding: 0.3rem;
+    }
+
+    .warningHeading {
+        font-size: 3rem;
+    }
+
+    .warningMessage {
+        font-size: 1.6rem;
+        margin: 1em 0em;
+    }
+
+    .deleteNow,
+    .cancelNow {
+        font-size: 2rem;
+        padding: 0.8rem;
+    }
+
+    .trans {
+        padding: 1em;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 2em;
+    }
+
+    .item {
+        margin-bottom: 0;
+        width: 65%;
+        justify-content: space-between;
+    }
+
+    .transIcon {
+        font-size: 3rem;
+        margin-right: 0.1em;
+    }
+
+    .itemName,
+    .itemPrice {
+        font-size: 1.4rem;
+    }
+
+    .itemType,
+    .itemTime {
+        font-size: 1.2rem;
+    }
+
+    .actions {
+        width: 30%;
+        margin-bottom: 2.5em;
+    }
+
+    .edit,
+    .delete {
+        padding: 1em;
+    }
+
+    .actionIcon {}
+
+    .editTitle,
+    .deleteTitle {
+        display: none;
+    }
+}

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budget Web</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
@@ -49,17 +49,17 @@
         </div>
         <div class="productInter hide">
             <span type="button" onclick="closeInterface()" class="close">&times</span>
-            <input type="text" name="" id="" class="productName" placeholder="Tên thu nhập">
-            <input type="text" name="" id="" class="productType" placeholder="Mô tả ">
-            <input type="number" name="" id="" class="productCost" placeholder="Giá trị">
+            <input type="text" name="" id="" class="productName" placeholder="Name">
+            <input type="text" name="" id="" class="productType" placeholder="Describe ">
+            <input type="number" name="" id="" class="productCost" placeholder="Cost">
             <button onclick="addProducts()" class="addProduct">Add Income</button>
             <button class="updateProduct">Update Income</button>
         </div>
         <div class="ammountInter hide">
             <span type="button" onclick="closeInterface()" class="close">&times</span>
-            <input type="text" name="" id="" class="incomeName" placeholder="Tên chi phí">
-            <input type="text" name="" id="" class="incomeType" placeholder="Mô tả">
-            <input type="number" name="" id="" class="incomeAmmount" placeholder="Giá trị">
+            <input type="text" name="" id="" class="incomeName" placeholder="Name">
+            <input type="text" name="" id="" class="incomeType" placeholder="Describe">
+            <input type="number" name="" id="" class="incomeAmmount" placeholder="Cost">
             <button onclick="addAmmounts()" class="addAmmount">Add Expense</button>
             <button class="updateAmmount">Update Expense</button>
         </div>
@@ -72,10 +72,10 @@
             </div>
             <div class="deleteActions">
                 <button onclick="deletetrans()" class="deleteNow">
-                    Xoá
+                    Delete
                 </button>
                 <button onclick="hideDelete()" class="cancelNow">
-                    Trở về
+                    Cancel
                 </button>
             </div>
         </div>
@@ -137,11 +137,14 @@
     <div class="snackBar ">
         All Fields Are Required
     </div>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script src="script.js"></script>
+    <!-- <a href="chart.html">Statistics
+    </a> -->
+
 </body>
 <!-- Script for icon -->
 
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="./js/script.js"></script>
 
 </html>

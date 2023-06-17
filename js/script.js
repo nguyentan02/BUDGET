@@ -56,6 +56,7 @@ function closeInterface() {
 
 let productName = document.querySelector('.productName');
 let productType = document.querySelector('.productType');
+// console.log(productType);
 let productCost = document.querySelector('.productCost');
 let incomeName = document.querySelector('.incomeName')
 let incomeType = document.querySelector('.incomeType');
@@ -76,12 +77,12 @@ function clearInputs() {
 //show pop up error
 
 function showError() {
-    snackBar.classList.add("show");
-    setTimeout(() => {
-        snackBar.classList.remove("show")
-    }, 3000);
+    // snackBar.classList.add("show");
+    // setTimeout(() => {
+    //     snackBar.classList.remove("show")
+    // }, 3000);
+    alert("Spending does not exceed income. Cannot add !")
 }
-showError();
 
 // check input product
 
@@ -100,7 +101,7 @@ function checkInputProduct() {
 function checkInputAmmount() {
     let ammountInput = false;
     if (incomeName.value.trim() != 0 && incomeType.value.trim() != 0 &&
-        incomeAmmount.value.trim() != 0) {
+        incomeAmmount.value.trim() < sumIncome()) {
         ammountInput = true;
     } else {
         ammountInput = false;
@@ -127,7 +128,7 @@ function createAmmount() {
     ammount = {
         obj: "ammount",
         name: incomeName.value,
-        iType: incomeType.value,
+        pType: incomeType.value,
         ammount: incomeAmmount.value,
         time: date.toLocaleDateString()
     }
@@ -185,7 +186,8 @@ function addAmmounts() {
         taksObj.unshift(ammount);
         setStorage(taksObj);
         updateApp();
-    } else {
+    }
+    else {
         showError();
     }
 
@@ -233,7 +235,7 @@ function displayItems() {
     if (taksObj.length != 0) {
         translist.innerHTML = html;
     } else {
-        translist.innerHTML = `<span class="noTask">Không có giao dịch để hiển thị!</span>`
+        translist.innerHTML = `<span class="noTask">No deals to show!</span>`
     }
 }
 
@@ -346,20 +348,21 @@ let editIndex = 0;
 function showEdit(index) {
     editIndex = index;
     let taksObj = getStorage();
+    // console.log(taksObj);
     hideElement();
     container.style.flexDirection = "row";
     if (taksObj[index].obj === "product") {
         productInter.classList.remove("hide");
         productName.value = taksObj[index].name;
-        productType.value = taksObj[index].ptype;
+        productType.value = taksObj[index].pType;
         productCost.value = taksObj[index].cost;
         addProduct.classList.add("hide");
         updateProduct.classList.remove("hide")
     } else {
         ammountInter.classList.remove("hide");
         incomeName.value = taksObj[index].name;
-        incomeType.value = taksObj[index].itype;
-        incomeAmmount.value = taksObj[index].cost;
+        incomeType.value = taksObj[index].pType;
+        incomeAmmount.value = taksObj[index].ammount;
         addAmmount.classList.add("hide");
         updateAmmount.classList.remove("hide")
     }

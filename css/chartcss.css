@@ -1,0 +1,116 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: linear-gradient(135deg,
+            #2b5876, #4e4376);
+    --secondary-color: linear-gradient(135deg, #E62B22, #EB5F22);
+    --th3--color: linear-gradient(135deg, #dd3e54, #6be585);
+    --dola-color: #006400;
+    --card-color: rgb(0, 191, 255);
+}
+
+body {
+    min-height: 100vh;
+
+}
+
+.main {
+    width: 60%;
+    margin: 0px auto;
+    /* padding-top: 100px; */
+
+}
+
+.title {
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 50px;
+}
+
+#canvas {
+    width: 100%;
+}
+
+.searchdate {
+    text-align: center;
+}
+
+.submit {
+    /* margin-top: 25px; */
+    width: 50px;
+}
+
+.trans {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    margin-top: 2em;
+    box-shadow: 0px 1px 2px rgb(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+.iconDetails {
+    display: flex;
+
+}
+
+.transIcon {
+    font-size: 1.6rem;
+    background: var(--primary-color);
+    color: white;
+    padding: 0.3em;
+    border-radius: 5px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.itemDetails {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0.5em;
+}
+
+.itemDate {
+    flex-direction: column;
+}
+
+.itemName,
+.itemPrice {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5em;
+}
+
+.itemPrice {
+    padding-right: 0.5em;
+}
+
+.itemType,
+.itemTime {
+    font-size: 0.8rem;
+}
+
+.itemName,
+.incomeType {
+    text-transform: capitalize;
+}
+
+.itemTime {
+    text-align: right;
+}
+
+.balance {
+    margin-top: 1em;
+    padding: 1em;
+}
+
+.totalBalance span {
+    padding-bottom: 1em;
+}

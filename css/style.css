@@ -11,7 +11,8 @@
             #2b5876, #4e4376);
     --secondary-color: linear-gradient(135deg, #E62B22, #EB5F22);
     --th3--color: linear-gradient(135deg, #dd3e54, #6be585);
-    --dola-color: rgb(51, 237, 9)
+    --dola-color: #006400;
+    --card-color: rgb(0, 191, 255);
 }
 
 html {
@@ -77,15 +78,22 @@ body {
 
 .up,
 .down {
-    font-size: 1rem;
+    /* font-size: 1rem;
     font-weight: 900;
-    color: greenyellow;
+    /* color: greenyellow; */
     margin-bottom: -0.1em;
     margin-right: -0.2em;
+    width: 20%;
+}
+
+.chart {
+    /* text-decoration: none; */
+    /* padding-right: 5em; */
+    color: white;
 }
 
 .down {
-    color: orangered;
+    background: #E62B22;
 }
 
 .resultType {
@@ -186,11 +194,13 @@ progress::-webkit-progress-value {
     cursor: pointer;
 }
 
-.productName,
+/* .productName, */
+/* .incomeName, */
 .productType,
 .productCost,
-.incomeName,
 .incomeType,
+.inputDateIn,
+.inputDateEx,
 .incomeAmmount {
     width: 100%;
     margin-bottom: 1em;
@@ -476,7 +486,7 @@ progress::-webkit-progress-value {
         margin-bottom: 0.5em;
     }
 
-    .productName,
+    /* .productName, */
     .productType,
     .productCost,
     .incomeType,
@@ -555,8 +565,6 @@ progress::-webkit-progress-value {
     .delete {
         padding: 1em;
     }
-
-    .actionIcon {}
 
     .editTitle,
     .deleteTitle {

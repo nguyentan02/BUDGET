@@ -1,4 +1,4 @@
-let container = document.querySelector('.container')
+// let container = document.querySelector('.container')
 let balance = document.querySelector('.balance')
 let progress = document.querySelector('.progress')
 let addIncome = document.querySelector('.addIncome')
@@ -36,13 +36,13 @@ function showProduct() {
     hideElement();
     productInter.classList.remove("hide");
     addProduct.classList.remove("hide");
-    container.style.flexDirection = "row";
+    // container.style.flexDirection = "row";
 }
 function showAmmount() {
     hideElement();
     ammountInter.classList.remove("hide");
     addAmmount.classList.remove("hide");
-    container.style.flexDirection = "row";
+    // container.style.flexDirection = "row";
 }
 
 //Close interface
@@ -50,20 +50,23 @@ function closeInterface() {
     showElements();
     productInter.classList.add("hide");
     ammountInter.classList.add("hide");
-    container.style.flexDirection = "column";
+    // container.style.flexDirection = "column";
 }
 
 
-let productName = document.querySelector('.productName');
+// let productName = document.querySelector('.productName');
+let productName = document.querySelector('.options')
+// console.log(productName.value);
+
 let productType = document.querySelector('.productType');
-// console.log(productType);
+
 let productCost = document.querySelector('.productCost');
-let incomeName = document.querySelector('.incomeName')
+let incomeName = document.querySelector('.options-ex')
 let incomeType = document.querySelector('.incomeType');
 let incomeAmmount = document.querySelector('.incomeAmmount');
 let snackBar = document.querySelector('.snackBar');
-let date = new Date();
-
+let dateIn = document.querySelector(".inputDateIn");
+let dateEx = document.querySelector(".inputDateEx")
 // Clear all input fields
 
 function clearInputs() {
@@ -75,20 +78,22 @@ function clearInputs() {
     incomeAmmount.value = "";
 }
 //show pop up error
-
-function showError() {
-    // snackBar.classList.add("show");
-    // setTimeout(() => {
-    //     snackBar.classList.remove("show")
-    // }, 3000);
-    alert("Spending does not exceed income. Cannot add !")
+const showError = (message) => {
+    alert(`${message}`);
 }
+// function showError() {
+//     // snackBar.classList.add("show");
+//     // setTimeout(() => {
+//     //     snackBar.classList.remove("show")
+//     // }, 3000);
+//     alert("Spending does not exceed income. Cannot add !")
+// }
 
 // check input product
 
 function checkInputProduct() {
     let productInput = false;
-    if (productName.value.trim() != 0 && productType.value.trim() != 0 &&
+    if (productType.value.trim() != 0 &&
         productCost.value.trim() != 0) {
         productInput = true;
     } else {
@@ -100,10 +105,11 @@ function checkInputProduct() {
 
 function checkInputAmmount() {
     let ammountInput = false;
-    if (incomeName.value.trim() != 0 && incomeType.value.trim() != 0 &&
+    if (incomeType.value.trim() != 0 &&
         incomeAmmount.value.trim() < sumIncome()) {
         ammountInput = true;
     } else {
+
         ammountInput = false;
     }
     return ammountInput;
@@ -114,11 +120,11 @@ function checkInputAmmount() {
 
 function createProduct() {
     product = {
-        obj: "product",
+        obj: "income",
         name: productName.value,
         pType: productType.value,
-        cost: productCost.value,
-        time: date.toLocaleDateString()
+        ammount: productCost.value,
+        time: dateIn.value,
     }
     return product;
 }
@@ -130,7 +136,7 @@ function createAmmount() {
         name: incomeName.value,
         pType: incomeType.value,
         ammount: incomeAmmount.value,
-        time: date.toLocaleDateString()
+        time: dateEx.value
     }
     return ammount;
 }
@@ -173,7 +179,7 @@ function addProducts() {
         setStorage(taksObj);
         updateApp();
     } else {
-        showError();
+        showError('Missing data');
     }
 }
 
@@ -188,7 +194,7 @@ function addAmmounts() {
         updateApp();
     }
     else {
-        showError();
+        showError('Missing data');
     }
 
 }
@@ -203,20 +209,20 @@ function displayItems() {
         html += `<div class="trans">
         <div class="item">
             <div class="iconDetails">
-                <ion-icon style="${item.obj == "product" ?
-                "background: var(--dola-color)" : "background:var(--secondary-color)"}" name=${item.obj == "product" ?
-                    "cash" : "pricetag"} class="transIcon"></ion-icon>
+                <ion-icon style="${item.obj == "income" ?
+                "background: var(--dola-color)" : "background:var(--card-color)"}" name=${item.obj == "income" ?
+                    "cash" : "card"} class="transIcon"></ion-icon>
                 <div class="itemDetails">
-                    <span class="itemName ">${item.obj == "product" ?
+                    <span class="itemName ">${item.obj == "income" ?
                 item.name : item.name} </span>
-                    <span class="itemType ">${item.obj == "product" ?
+                    <span class="itemType ">${item.obj == "income" ?
                 item.pType : item.pType}</span>
                 </div>
             </div>
             <div class="iconDetails itemDate">
-                <span style="${item.obj == "product" ?
-                "color:green" : "color:red"}" class="itemPrice">${item.obj == "product" ?
-                    "$" + item.cost : "$" + item.ammount} </span>
+                <span style="${item.obj == "income" ?
+                "color:green" : "color:red"}" class="itemPrice">${item.obj == "income" ?
+                    item.ammount + " vnđ" : item.ammount + " vnđ"}  </span>
                 <span class="itemTime">${item.time}</span>
             </div>
         </div>
@@ -243,7 +249,7 @@ function displayItems() {
 function filterIncome() {
     let taksObj = getStorage();
     let income = taksObj.filter((item) => {
-        return item.obj === "product"
+        return item.obj === "income"
     });
     return income;
 }
@@ -265,8 +271,8 @@ function sumExpense() {
 
 function sumIncome() {
     let income = filterIncome();
-    let totalIncome = income.map(spent => spent.cost).reduce((total, spent) =>
-        Number(spent) + Number(total), 0);
+    let totalIncome = income.map(cash => cash.ammount).reduce((total, cash) =>
+        Number(cash) + Number(total), 0);
     return totalIncome;
 
 }
@@ -280,6 +286,9 @@ function getBalance() {
     return totalBalance;
 }
 
+function format2(n, currency) {
+    return n.toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + currency;
+}
 //
 function updataBalance() {
     let totalIncome = sumIncome();
@@ -289,9 +298,9 @@ function updataBalance() {
     let expenseValue = document.querySelector(".expenseValue");
     let totalBalVal = document.querySelector(".totalBalVal");
 
-    incomeValue.textContent = "$" + totalIncome + ".00";
-    expenseValue.textContent = "$" + totalExpense + ".00";
-    totalBalVal.textContent = "$" + totalBalance + ".00";
+    incomeValue.textContent = format2(totalIncome, ' vnđ');
+    expenseValue.textContent = format2(totalExpense, ' vnđ');
+    totalBalVal.textContent = format2(totalBalance, ' vnđ');
     //set progress
 
     let progress = document.querySelector(".progress")
@@ -310,8 +319,8 @@ function showDelete(index) {
     deleteIndex = index;
     let taksObj = getStorage();
     hideElement();
-    container.style.flexDirection = "row";
-    deleteInterface.style.display = "flex"
+    // container.style.flexDirection = "column";
+    deleteInterface.style.display = "flex";
 
     if (taksObj[index].obj === "product") {
         itemName = taksObj[index].name;
@@ -326,7 +335,7 @@ function showDelete(index) {
 //hide delete
 function hideDelete() {
     showElements();
-    container.style.flexDirection = "column";
+    // container.style.flexDirection = "column";
     deleteInterface.style.display = "none"
 }
 
@@ -350,12 +359,12 @@ function showEdit(index) {
     let taksObj = getStorage();
     // console.log(taksObj);
     hideElement();
-    container.style.flexDirection = "row";
-    if (taksObj[index].obj === "product") {
+    // container.style.flexDirection = "row";
+    if (taksObj[index].obj === "income") {
         productInter.classList.remove("hide");
         productName.value = taksObj[index].name;
         productType.value = taksObj[index].pType;
-        productCost.value = taksObj[index].cost;
+        productCost.value = taksObj[index].ammount;
         addProduct.classList.add("hide");
         updateProduct.classList.remove("hide")
     } else {
@@ -367,3 +376,23 @@ function showEdit(index) {
         updateAmmount.classList.remove("hide")
     }
 }
+function updateTrans() {
+
+    let taksObj = getStorage();
+    if (taksObj[editIndex].obj === "income") {
+
+        taksObj[editIndex].name = productName.value;
+        taksObj[editIndex].pType = productType.value;
+        taksObj[editIndex].ammount = productCost.value;
+
+    } else {
+        taksObj[editIndex].name = incomeName.value;
+        taksObj[editIndex].pType = incomeType.value
+        taksObj[editIndex].ammount = incomeAmmount.value;
+    }
+    setStorage(taksObj);
+    // container.style.flexDirection = "column";
+    updateApp();
+}
+
+

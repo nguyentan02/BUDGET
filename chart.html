@@ -1,36 +1,104 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', { 'packages': ['bar'] });
-        google.charts.setOnLoadCallback(drawChart);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/chartcss.css">
 
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['Day', 'Income', 'Expenses'],
-                ['6/16', 1000, 400],
-                ['6/17', 1170, 460],
-                ['6/18', 660, 1120],
-                ['6/19', 1030, 540]
-            ]);
-
-            var options = {
-                chart: {
-                    title: 'Statistics',
-                    subtitle: '',
-                }
-            };
-
-            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-            chart.draw(data, google.charts.Bar.convertOptions(options));
-        }
-    </script>
 </head>
 
 <body>
-    <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+    <div class="main">
+        <div class="title">Line Chart</div>
+        <canvas id="canvas"></canvas>
+    </div>
+    <div class="searchdate">
+        <p>Search deals by date</p>
+        <input id="inputdate" type="date" name="" id="">
+        <!-- <input class="submit" type="submit" value="Search">s -->
+    </div>
+    <div class="translist">
+        <div class="trans">
+            <div class="item">
+                <div class="iconDetails">
+                    <ion-icon name="cash-outline" class="transIcon"></ion-icon>
+                    <div class="itemDetails">
+                        <span class="itemName ">Cong viec 1 </span>
+                        <span class="itemType ">Mô tả công việc</span>
+                    </div>
+                </div>
+                <div class="iconDetails  itemDate">
+                    <span class="itemPrice">$5000 </span>
+
+                    <span class="itemTime">27/09/2002</span>
+                </div>
+            </div>
+            <!-- <div class="actions">
+                <button class="edit">
+                    <ion-icon name="create-outline" class="actionIcon"></ion-icon>
+                    <span class="editTitle">Edit</span>
+                </button>
+                <button class="delete">
+                    <ion-icon name="trash-outline"></ion-icon>
+                    <span class="deleteTitle">Delete</span>
+                </button>
+            </div> -->
+        </div>
+        <div class="trans">
+            <div class="item">
+                <div class="iconDetails">
+                    <ion-icon name="cash-outline" class="transIcon"></ion-icon>
+                    <div class="itemDetails">
+                        <span class="itemName ">Công việc 2</span>
+                        <span class="itemType ">Mô tả công việc</span>
+                    </div>
+                </div>
+                <div class="iconDetails itemDate">
+                    <span class="itemPrice">$500</span>
+
+                    <span class="itemTime">27/39/2002</span>
+                </div>
+            </div>
+            <!-- <div class="actions">
+                <button class="edit">
+                    <ion-icon name="create-outline" class="actionIcon"></ion-icon>
+                    <span class="editTitle">Edit</span>
+                </button>
+                <button class="delete">
+                    <ion-icon name="trash-outline"></ion-icon>
+                    <span class="deleteTitle">Delete</span>
+                </button>
+            </div> -->
+        </div>
+        <div class="balance">
+            <span class="totalBal">
+                Total Balance
+            </span>
+            <span class="totalBalVal">
+                $000.00
+            </span>
+            <div class="results">
+                <div>
+                    <span class="resultTitle">Total Income</span>
+                    <span class="TotalIncomeValue">
+                        $000.00
+                    </span>
+                </div>
+                <div>
+                    <span class="resultTitle">Total Expense</span>
+                    <span class="expenseValue">
+                        $000.00
+                    </span>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+        <script src="./js/chart.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
+
 
 </html>

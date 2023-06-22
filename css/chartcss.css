@@ -15,7 +15,7 @@
 
 body {
     min-height: 100vh;
-
+    background-color: aliceblue;
 }
 
 .main {
@@ -37,11 +37,12 @@ body {
 
 .searchdate {
     text-align: center;
+    margin-top: 20px;
 }
 
-.submit {
-    /* margin-top: 25px; */
-    width: 50px;
+.titleSearch {
+    font-weight: 400;
+    font-size: 20px;
 }
 
 .trans {
@@ -109,8 +110,31 @@ body {
 .balance {
     margin-top: 1em;
     padding: 1em;
+    font-weight: 400;
+    font-size: 20px;
 }
 
 .totalBalance span {
     padding-bottom: 1em;
+}
+
+.hide {
+    display: none;
+}
+
+.up {
+    color: #1637d6;
+}
+
+.down {
+    color: #ed021b;
+}
+
+.calucla {
+    color: #020024;
+}
+
+.resultTitle,
+.totalBal {
+    font-weight: bold;
 }

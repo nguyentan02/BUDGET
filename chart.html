@@ -6,18 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./css/chartcss.css">
-
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-up-r.css' rel='stylesheet'>
 </head>
 
 <body>
     <div class="main">
-        <div class="title">Line Chart</div>
+        <div class="title">Transaction Statistics Chart</div>
         <canvas id="canvas"></canvas>
     </div>
     <div class="searchdate">
-        <p>Search deals by date</p>
+        <p class="titleSearch">Search deals by date</p>
         <input id="inputdate" type="date" name="" id="">
         <!-- <input class="submit" type="submit" value="Search">s -->
+    </div>
+    <div class="balance hide">
+        <div class="results">
+            <div>
+                <ion-icon class="up" name="arrow-up-outline"></ion-icon>
+                <span class="resultTitle">
+                    Total Income: </span>
+
+                <span id="TotalIncomeValue">
+                    $000.00
+                </span>
+            </div>
+            <div>
+                <ion-icon class="down" name="arrow-down-outline"></ion-icon>
+                <span class="resultTitle">Total Expense:</span>
+                <span id="TotalExpenseValue">
+                    $000.00
+                </span>
+            </div>
+        </div>
+        <ion-icon class="calcula" name="calculator-outline"></ion-icon>
+        <span class="totalBal">
+            Total Balance:
+        </span>
+        <span id="totalBalVal">
+            $000.00
+        </span>
     </div>
     <div class="translist">
         <div class="trans">
@@ -72,32 +99,12 @@
                 </button>
             </div> -->
         </div>
-        <div class="balance">
-            <span class="totalBal">
-                Total Balance
-            </span>
-            <span class="totalBalVal">
-                $000.00
-            </span>
-            <div class="results">
-                <div>
-                    <span class="resultTitle">Total Income</span>
-                    <span class="TotalIncomeValue">
-                        $000.00
-                    </span>
-                </div>
-                <div>
-                    <span class="resultTitle">Total Expense</span>
-                    <span class="expenseValue">
-                        $000.00
-                    </span>
-                </div>
-            </div>
-        </div>
+
         <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
         <script src="./js/chart.js"></script>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 </body>
 
 

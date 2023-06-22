@@ -7,8 +7,6 @@ for (let i = 0; i < dataJson.length; ++i) {
     if (newArrayDate.indexOf(dataJson[i].time) == -1)
         newArrayDate.push(dataJson[i].time);
 }
-// newArrayDate.sort(function (a, b) { return a - b });
-// console.log(newArrayDate);
 
 
 function getStorage() {
@@ -28,8 +26,12 @@ const elementArray = getStorage();
 let filterDate = [];
 
 dateSort.addEventListener('change', function () {
+    const bal = document.querySelector('.balance');
+    bal.classList.remove("hide");
     filterDate = [];
-    let total = 0;
+    let totalIn = 0;
+    let totalEx = 0;
+    let totalBalance = 0;
     const selectedDate = new Date(dateSort.value).toLocaleDateString('zh-Hans-CN');
     const dateParts = selectedDate.split("/");
     const year = dateParts[0];
@@ -41,17 +43,34 @@ dateSort.addEventListener('change', function () {
             filterDate.push(elementArray[i]);
     }
     displayItems(filterDate);
-    for (let i = 0; i < elementArray.length; ++i) {
-        if (elementArray[i].time === formattedDate)
-            total += Number(elementArray[i].ammount)
+    for (let i = 0; i < elementArrayIn.length; ++i) {
+        if (elementArrayIn[i].time === formattedDate)
+            totalIn += Number(elementArrayIn[i].ammount)
     }
-    console.log(total);
+    for (let i = 0; i < elementArrayEx.length; ++i) {
+        if (elementArrayEx[i].time === formattedDate)
+            totalEx += Number(elementArrayEx[i].ammount)
+    }
+    totalBalance = totalIn - totalEx;
+
+
+    const totalIncomme = document.getElementById('TotalIncomeValue');
+    const totalExpenseValue = document.getElementById('TotalExpenseValue');
+    const totalBalVal = document.getElementById('totalBalVal');
+    totalIncomme.textContent = format2(totalIn, ' vnđ');
+    totalExpenseValue.textContent = format2(totalEx, ' vnđ');
+    totalBalVal.textContent = format2(totalBalance, ' vnđ');
+
 });
+
+
+
 let taksObj = getStorage();
 function displayItems(taksObj) {
     let translist = document.querySelector(".translist");
     translist.innerHTML = "";
     let html = "";
+    let total = "";
     taksObj.forEach((item, index) => {
         html += `<div class="trans">
         <div class="item">
@@ -81,6 +100,7 @@ function displayItems(taksObj) {
         translist.innerHTML = `<span class="noTask">No deals to show!</span>`
     }
 }
+displayItems(taksObj);
 
 function sumExpense() {
     let income = filterExpense();
@@ -99,45 +119,15 @@ function sumIncome() {
 
 }
 
-
-
-
-
-
-//funtion displayTotal
-
-// function displayTotalDate(taksObj) {
-//     let total = document.querySelector(".balance");
-//     total.innerHTML = "";
-//     let html = "";
-//     taksObj.forEach((item, index) => {
-//         html += `<div class="balance">
-//         <span class="totalBal">
-//             Total Balance
-//         </span>
-//         <span class="totalBalVal">
-//             ${}
-//         </span>
-//         <div class="results">
-//             <div>
-//                 <span class="resultTitle">Total Income</span>
-//                 <span class="TotalIncomeValue">
-//                     $000.00
-//                 </span>
-//             </div>
-//             <div>
-//                 <span class="resultTitle">Total Expense</span>
-//                 <span class="expenseValue">
-//                     $000.00
-//                 </span>
-//             </div>
-//         </div>
-//     </div>`
-//     });
-//     total.innerHTML = html;
-// }
-// displayTotalDate(taksObj);
-displayItems(taksObj)
+function getBalance() {
+    let totalIncome = sumIncome();
+    let totalExpense = sumExpense();
+    let totalBalance = totalIncome - totalExpense;
+    return totalBalance;
+}
+function format2(n, currency) {
+    return n.toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + currency;
+}
 //filter income
 function filterIncome() {
     let taksObj = getStorage();

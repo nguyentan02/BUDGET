@@ -135,6 +135,8 @@ progress::-webkit-progress-value {
 
 }
 
+
+
 .addIncome,
 .addExpense,
 .addProduct,
@@ -212,6 +214,9 @@ progress::-webkit-progress-value {
     border: 1px solid gainsboro;
 }
 
+.error {
+    border: 2px solid red;
+}
 
 .hide {
     display: none;
@@ -323,7 +328,8 @@ progress::-webkit-progress-value {
 }
 
 .itemName,
-.incomeType {
+.incomeType,
+.productType {
     text-transform: capitalize;
 }
 

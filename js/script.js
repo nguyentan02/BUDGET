@@ -94,7 +94,7 @@ const showError = (message) => {
 function checkInputProduct() {
     let productInput = false;
     if (productType.value.trim() != 0 &&
-        productCost.value.trim() != 0) {
+        productCost.value.trim() != 0 && dateIn.value != '') {
         productInput = true;
     } else {
         productInput = false;
@@ -106,11 +106,11 @@ function checkInputProduct() {
 function checkInputAmmount() {
     let ammountInput = false;
     if (incomeType.value.trim() != 0 &&
-        incomeAmmount.value.trim() < sumIncome()) {
+        incomeAmmount.value.trim() < sumIncome() && dateEx.value != '') {
         ammountInput = true;
     } else {
-
         ammountInput = false;
+        incomeAmmount.classList.add('error')
     }
     return ammountInput;
 }

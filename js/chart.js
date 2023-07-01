@@ -8,7 +8,6 @@ for (let i = 0; i < dataJson.length; ++i) {
         newArrayDate.push(dataJson[i].time);
 }
 
-
 function getStorage() {
     let taksObj;
     let webTasks = localStorage.getItem("localTasks");
@@ -24,10 +23,13 @@ function getStorage() {
 const dateSort = document.getElementById('inputdate');
 const elementArray = getStorage();
 let filterDate = [];
+const translist = document.querySelector('.translist')
+
 
 dateSort.addEventListener('change', function () {
     const bal = document.querySelector('.balance');
     bal.classList.remove("hide");
+    translist.classList.remove("hide");
     filterDate = [];
     let totalIn = 0;
     let totalEx = 0;
@@ -88,7 +90,7 @@ function displayItems(taksObj) {
             <div class="iconDetails itemDate">
                 <span style="${item.obj == "income" ?
                 "color:green" : "color:red"}" class="itemPrice">${item.obj == "income" ?
-                    item.ammount + " vnđ" : item.ammount + " vnđ"}  </span>
+                    item.ammount + " VND" : item.ammount + " VND"}  </span>
                 <span class="itemTime">${item.time}</span>
             </div>
         </div>
@@ -100,7 +102,7 @@ function displayItems(taksObj) {
         translist.innerHTML = `<span class="noTask">No deals to show!</span>`
     }
 }
-displayItems(taksObj);
+// displayItems(taksObj);
 
 function sumExpense() {
     let income = filterExpense();
@@ -143,7 +145,7 @@ const newArrayIncome = [];
 for (let i = 0; i < elementArrayIn.length; ++i) {
     newArrayIncome.push(elementArrayIn[i].ammount);
 }
-
+// console.log(newArrayIncome);
 // newArrayIncome.sort(function (a, b) { return a - b });
 
 //filter expense
@@ -161,32 +163,164 @@ for (let i = 0; i < elementArrayEx.length; ++i) {
     newArrayEx.push(elementArrayEx[i].ammount);
 }
 
-
-// newArrayEx.sort(function (a, b) { return a - b });
 const data = {
     labels: newArrayDate,
     datasets: [{
         label: 'Income',
         data: newArrayIncome,
-        backgroundColor: "blue",
-        borderColor: 'blue',
-        tension: 0.4,
+        backgroundColor:
+            'blue'
+        ,
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
     },
     {
         label: 'Expense',
         data: newArrayEx,
-        backgroundColor: "red",
-        borderColor: 'red',
-        tension: 0.1,
-    }
-    ],
-}
+        backgroundColor:
+            'red'
+        ,
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
+    }]
+};
 const config = {
-    type: 'line',
+    type: 'bar',
     data: data,
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    },
+};
+// newArrayEx.sort(function (a, b) { return a - b });
+// const data = {
+//     labels: newArrayDate,
+//     datasets: [{
+//         label: 'Income',
+//         data: newArrayIncome,
+//         backgroundColor: "blue",
+//         borderColor: 'blue',
+//         tension: 0.4,
+//     },
+//     {
+//         label: 'Expense',
+//         data: newArrayEx,
+//         backgroundColor: "red",
+//         borderColor: 'red',
+//         tension: 0.1,
+//     }
+//     ],
+// }
+// const config = {
+//     type: 'line',
+//     data: data,
 
+// };
+
+// const convertData = newArrayIncome.map(value => parseInt(value, 10));
+
+const convertData = new Map()
+const income = filterIncome();
+const expense = filterExpense()
+// function aggregateIncomeData(income) {
+//     const result = {};
+//     income.forEach(entry => {
+//         const { name, ammount } = entry;
+//         if (!result[name]) {
+//             result[name] = 0;
+//         }
+//         result[name] += parseInt(ammount, 10);
+//     });
+//     (Object.entries(result).map(e => {
+//         console.log(e);
+//     }));
+//     return Object.entries(result).map(([key, value]) => (value))
+// }
+function aggregateData(income) {
+    const result = {};
+
+    income.forEach(entry => {
+        const { name, ammount } = entry;
+        if (!result[name]) {
+            result[name] = 0;
+        }
+        result[name] += parseInt(ammount, 10);
+    });
+
+    return Object.entries(result).map(([name, ammount]) => ({ name, ammount }));
+}
+const dataChart = aggregateData(income);
+const dataEx = aggregateData(expense)
+// console.log(dataChart);
+const data2 = {
+    labels:
+        // 'Tiền lương',
+        // 'Tiền thưởng',
+        // 'Bán Hàng',
+        // 'Cho thuê',
+        // 'Khác',
+        dataChart.map(e =>
+            e.name
+        )
+    ,
+    datasets: [{
+        label: 'Income',
+        data: dataChart.map(e =>
+            e.ammount
+        ),
+        backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)',
+            'black',
+            'green',
+        ],
+        hoverOffset: 3
+    }]
+};
+const config2 = {
+    type: 'pie',
+    data: data2,
+};
+//expense
+const data3 = {
+    labels:
+        // 'Ăn uống',
+        // 'Quàn Áo',
+        // 'Mua Sắm',
+        // 'Giao thông',
+        // 'Du lịch',
+        // 'Khác'
+        dataEx.map(e => e.name)
+    ,
+    datasets: [{
+        label: 'Expense',
+        data: dataEx.map(e => e.ammount),
+        backgroundColor: [
+            '#E0E0E0',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)',
+            'rgb(245, 245, 35)',
+            'rgb(252, 14, 14)',
+            '#000033',
+        ],
+        hoverOffset: 3
+    }],
+
+};
+const config3 = {
+    type: 'pie',
+    data: data3,
 };
 
 const canvas = document.getElementById('canvas');
 
-const chart = new Chart(canvas, config)
+const canvas2 = document.getElementById('canvas2');
+const canvas3 = document.getElementById('canvas3');
+
+const chart = new Chart(canvas, config);
+const chart2 = new Chart(canvas2, config2);
+const chart3 = new Chart(canvas3, config3);

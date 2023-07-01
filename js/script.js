@@ -72,10 +72,10 @@ let dateEx = document.querySelector(".inputDateEx")
 function clearInputs() {
     productName.value = "";
     productType.value = "";
-    productCost.value = "";
+    // productCost.value = "";
     incomeName.value = "";
     incomeType.value = "";
-    incomeAmmount.value = "";
+    // incomeAmmount.value = "";
 }
 //show pop up error
 const showError = (message) => {
@@ -162,7 +162,6 @@ function getStorage() {
     }
     return taksObj;
 }
-
 //set items in local 
 function setStorage(data) {
     localStorage.setItem("localTasks", JSON.stringify(data));
@@ -222,7 +221,7 @@ function displayItems() {
             <div class="iconDetails itemDate">
                 <span style="${item.obj == "income" ?
                 "color:green" : "color:red"}" class="itemPrice">${item.obj == "income" ?
-                    item.ammount + " vnđ" : item.ammount + " vnđ"}  </span>
+                    item.ammount + " VND" : item.ammount + " VND"}  </span>
                 <span class="itemTime">${item.time}</span>
             </div>
         </div>
@@ -298,9 +297,9 @@ function updataBalance() {
     let expenseValue = document.querySelector(".expenseValue");
     let totalBalVal = document.querySelector(".totalBalVal");
 
-    incomeValue.textContent = format2(totalIncome, ' vnđ');
-    expenseValue.textContent = format2(totalExpense, ' vnđ');
-    totalBalVal.textContent = format2(totalBalance, ' vnđ');
+    incomeValue.textContent = format2(totalIncome, ' VND');
+    expenseValue.textContent = format2(totalExpense, ' VND');
+    totalBalVal.textContent = format2(totalBalance, ' VND');
     //set progress
 
     let progress = document.querySelector(".progress")

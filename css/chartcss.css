@@ -22,6 +22,7 @@ body {
     width: 60%;
     margin: 0px auto;
     /* padding-top: 100px; */
+    margin-bottom: 20px;
 
 }
 
@@ -31,8 +32,24 @@ body {
     margin-bottom: 50px;
 }
 
+.chartjs {
+    display: flex;
+
+}
+
 #canvas {
     width: 100%;
+}
+
+.chart2 {
+    width: 50%;
+    /* height: 400px; */
+    padding: 0 100px;
+    text-align: center;
+}
+
+#canvas2 {
+    height: 400px;
 }
 
 .searchdate {
@@ -95,7 +112,7 @@ body {
 
 .itemType,
 .itemTime {
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 .itemName,
@@ -137,4 +154,18 @@ body {
 .resultTitle,
 .totalBal {
     font-weight: bold;
+}
+
+.sp-income,
+.sp-expense {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.sp-income {
+    color: #1637d6;
+}
+
+.sp-expense {
+    color: #ed021b;
 }

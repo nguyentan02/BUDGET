@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Transaction </title>
     <link rel="stylesheet" href="./css/chartcss.css">
     <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-up-r.css' rel='stylesheet'>
 </head>
@@ -12,7 +12,20 @@
 <body>
     <div class="main">
         <div class="title">Transaction Statistics Chart</div>
-        <canvas id="canvas"></canvas>
+        <div class="chart">
+            <canvas id="canvas"></canvas>
+        </div>
+
+    </div>
+    <div class="chartjs">
+        <div class="chart2">
+            <canvas id="canvas2"></canvas>
+            <span class="sp-income">Income</span>
+        </div>
+        <div class="chart2">
+            <canvas id="canvas3"></canvas>
+            <span class="sp-expense">Expense</span>
+        </div>
     </div>
     <div class="searchdate">
         <p class="titleSearch">Search deals by date</p>
@@ -46,7 +59,7 @@
             $000.00
         </span>
     </div>
-    <div class="translist">
+    <div class="translist hide">
         <div class="trans">
             <div class="item">
                 <div class="iconDetails">

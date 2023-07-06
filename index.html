@@ -54,6 +54,8 @@
             <button onclick="showProduct()" class="addIncome">Add Income</button>
             <button onclick="showAmmount()" class="addExpense">Add Expense</button>
         </div>
+        <button onclick="deleteData()" class="clearLocal">
+            <ion-icon class="iconDelete" name="trash-outline"></ion-icon>Delete All</button>
         <div class="productInter hide">
             <span type="button" onclick="closeInterface()" class="close">&times</span>
             <!-- <input type="text" name="" id="" class="productName" placeholder="Name"> -->
@@ -82,7 +84,7 @@
             </div>
             <input type="text" name="" id="" class="productType" placeholder="Describe ">
             <input type="number" name="" id="" class="productCost" placeholder="Cost">
-            <input type="date" name="" class="inputDateIn" id="">
+            <input type="date" name="" class="inputDateIn" id="Date">
             <button onclick="addProducts()" class="addProduct">Add Income</button>
             <button onclick="updateTrans()" class="updateProduct">Update Income</button>
         </div>
@@ -116,7 +118,7 @@
 
             <input type="text" name="" id="" class="incomeType" placeholder="Describe">
             <input type="number" name="" id="" class="incomeAmmount" placeholder="Cost">
-            <input type="date" name="" class="inputDateEx" id="">
+            <input type="date" name="" class="inputDateEx" id="Date1">
             <button onclick="addAmmounts()" class="addAmmount">Add Expense</button>
             <button onclick="updateTrans()" class="updateAmmount">Update Expense</button>
         </div>
@@ -203,6 +205,5 @@
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="./js/script.js"></script>
 <!-- <script src="./js/dropdown.js"></script> -->
-
 
 </html>

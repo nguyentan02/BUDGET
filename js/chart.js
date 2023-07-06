@@ -138,16 +138,19 @@ function filterIncome() {
     });
     return income;
 }
+
 const elementArrayIn = filterIncome();
-
 const newArrayIncome = [];
-//array  income
-for (let i = 0; i < elementArrayIn.length; ++i) {
-    newArrayIncome.push(elementArrayIn[i].ammount);
-}
-// console.log(newArrayIncome);
-// newArrayIncome.sort(function (a, b) { return a - b });
-
+// array  income
+// const sumIncomeChart = [];
+// for (let i = 0; i < elementArrayIn.length; ++i) {
+//     sumIncomeChart.push(parseInt(elementArrayIn[i].ammount));
+// }
+// function sumArray(array) {
+//     return array.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+// }
+// // array income chart
+// newArrayIncome.push(sumArray(sumIncomeChart))
 //filter expense
 function filterExpense() {
     let taksObj = getStorage();
@@ -157,17 +160,129 @@ function filterExpense() {
     return expense;
 }
 const elementArrayEx = filterExpense();
-const newArrayEx = [];
+// const newArrayEx = [];
+// const sumExChart = [];
+// for (let i = 0; i < elementArrayEx.length; ++i) {
+//     sumExChart.push(parseInt(elementArrayEx[i].ammount));
+// }
+// newArrayEx.push(sumArray(sumExChart))
 
-for (let i = 0; i < elementArrayEx.length; ++i) {
-    newArrayEx.push(elementArrayEx[i].ammount);
+const convertData = new Map()
+const income = filterIncome();
+const expense = filterExpense()
+
+function aggregateData1(income) {
+    const result = {};
+
+    income.forEach(entry => {
+        const { name, ammount } = entry;
+        if (!result[name]) {
+            result[name] = 0;
+        }
+        result[name] += parseInt(ammount, 10);
+    });
+
+    return Object.entries(result).map(([name, ammount]) => ({ name, ammount }));
+}
+const dataChart = aggregateData1(income);
+const dataEx = aggregateData1(expense)
+// console.log(dataChart);
+const filterData = document.getElementById('select');
+
+function aggregateData3(income, expense) {
+    const result = {};
+
+    // Aggregate income data
+    income.forEach(entry => {
+        const { time, ammount } = entry;
+        const month = time.slice(0, 7); // Extract the month from the time value
+
+        if (!result[month]) {
+            result[month] = { income: 0, expense: 0 };
+        }
+        result[month].income += parseInt(ammount, 10);
+    });
+
+    // Aggregate expense data
+    expense.forEach(entry => {
+        const { time, ammount } = entry;
+        const month = time.slice(0, 7); // Extract the month from the time value
+
+        if (!result[month]) {
+            result[month] = { income: 0, expense: 0 };
+        }
+        result[month].expense += parseInt(ammount, 10);
+    });
+
+    const sortedData = Object.entries(result).map(([month, data]) => ({
+        month,
+        income: data.income,
+        expense: data.expense
+    })).sort((a, b) => new Date(a.month) - new Date(b.month));
+    return sortedData;
+}
+function filterDataByMonth(aggregatedData, targetMonth) {
+    return aggregatedData.filter(entry => entry.month === targetMonth);
 }
 
+const aggregatedData5 = aggregateData3(income, expense);
+const targetMonth = '2023-06';
+console.log(targetMonth);
+const filteredData = filterDataByMonth(aggregatedData5, targetMonth);
+console.log(filteredData);
+// filterData.addEventListener('change', function () {
+//     if (filterData.value === 'Tháng') {
+//         const aggregatedData = aggregateData3(income, expense);
+//         console.log(aggregatedData);
+//     }
+//     else {
+//         return result = 0
+//     }
+// })
+
+
+
+function aggregateData2(income, expense) {
+    const result = {};
+    // Aggregate income data
+    income.forEach(entry => {
+        const { time, ammount } = entry;
+        if (!result[time]) {
+            result[time] = { income: 0, expense: 0 };
+        }
+        result[time].income += parseInt(ammount, 10);
+    });
+
+    // Aggregate expense data
+    expense.forEach(entry => {
+        const { time, ammount } = entry;
+        if (!result[time]) {
+            result[time] = { income: 0, expense: 0 };
+        }
+        result[time].expense += parseInt(ammount, 10);
+    });
+
+    const sortedData = Object.entries(result).map(([time, data]) => ({
+        time,
+        income: data.income,
+        expense: data.expense
+    })).sort((a, b) => new Date(a.time) - new Date(b.time));
+
+    return sortedData;
+}
+
+const aggregatedData = aggregateData2(income, expense);
+
 const data = {
-    labels: newArrayDate,
+    labels: aggregatedData.map(e =>
+        e.time
+    )
+    ,
     datasets: [{
         label: 'Income',
-        data: newArrayIncome,
+        data: aggregatedData.map(e =>
+            e.income
+        ),
         backgroundColor:
             'blue'
         ,
@@ -176,7 +291,9 @@ const data = {
     },
     {
         label: 'Expense',
-        data: newArrayEx,
+        data: aggregatedData.map(e =>
+            e.expense
+        ),
         backgroundColor:
             'red'
         ,
@@ -195,66 +312,7 @@ const config = {
         }
     },
 };
-// newArrayEx.sort(function (a, b) { return a - b });
-// const data = {
-//     labels: newArrayDate,
-//     datasets: [{
-//         label: 'Income',
-//         data: newArrayIncome,
-//         backgroundColor: "blue",
-//         borderColor: 'blue',
-//         tension: 0.4,
-//     },
-//     {
-//         label: 'Expense',
-//         data: newArrayEx,
-//         backgroundColor: "red",
-//         borderColor: 'red',
-//         tension: 0.1,
-//     }
-//     ],
-// }
-// const config = {
-//     type: 'line',
-//     data: data,
 
-// };
-
-// const convertData = newArrayIncome.map(value => parseInt(value, 10));
-
-const convertData = new Map()
-const income = filterIncome();
-const expense = filterExpense()
-// function aggregateIncomeData(income) {
-//     const result = {};
-//     income.forEach(entry => {
-//         const { name, ammount } = entry;
-//         if (!result[name]) {
-//             result[name] = 0;
-//         }
-//         result[name] += parseInt(ammount, 10);
-//     });
-//     (Object.entries(result).map(e => {
-//         console.log(e);
-//     }));
-//     return Object.entries(result).map(([key, value]) => (value))
-// }
-function aggregateData(income) {
-    const result = {};
-
-    income.forEach(entry => {
-        const { name, ammount } = entry;
-        if (!result[name]) {
-            result[name] = 0;
-        }
-        result[name] += parseInt(ammount, 10);
-    });
-
-    return Object.entries(result).map(([name, ammount]) => ({ name, ammount }));
-}
-const dataChart = aggregateData(income);
-const dataEx = aggregateData(expense)
-// console.log(dataChart);
 const data2 = {
     labels:
         // 'Tiền lương',
@@ -272,11 +330,11 @@ const data2 = {
             e.ammount
         ),
         backgroundColor: [
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
+            'rgb(115, 230, 0)',
+            'rgb(51, 153, 255))',
             'rgb(255, 205, 86)',
-            'black',
-            'green',
+            'rgb(0, 0, 255)',
+            'rgb(26, 178, 255)',
         ],
         hoverOffset: 3
     }]
@@ -300,11 +358,11 @@ const data3 = {
         label: 'Expense',
         data: dataEx.map(e => e.ammount),
         backgroundColor: [
-            '#E0E0E0',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)',
-            'rgb(245, 245, 35)',
-            'rgb(252, 14, 14)',
+            '#FF8C00',
+            '#8B0000',
+            'rgb(255, 255, 0)',
+            '#FF0000',
+            'rgb(179, 0, 89)',
             '#000033',
         ],
         hoverOffset: 3

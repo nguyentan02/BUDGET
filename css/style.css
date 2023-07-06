@@ -196,6 +196,20 @@ progress::-webkit-progress-value {
     cursor: pointer;
 }
 
+.clearLocal {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100px;
+    background-color: #F70220;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.clearLocal:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
 /* .productName, */
 /* .incomeName, */
 .productType,
@@ -326,6 +340,8 @@ progress::-webkit-progress-value {
 .itemTime {
     font-size: 0.8rem;
 }
+
+
 
 .itemName,
 .incomeType,

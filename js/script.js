@@ -10,7 +10,7 @@ let updateProduct = document.querySelector('.updateProduct')
 let addAmmount = document.querySelector('.addAmmount')
 let updateAmmount = document.querySelector('.updateAmmount')
 let translist = document.querySelector('.translist')
-
+const clearLocal = document.querySelector('.clearLocal')
 
 updataBalance();
 displayItems();
@@ -22,6 +22,7 @@ function hideElement() {
     progress.classList.add("hide");
     updateProduct.classList.add("hide");
     updateAmmount.classList.add("hide");
+    clearLocal.classList.add("hide");
 }
 
 function showElements() {
@@ -30,6 +31,7 @@ function showElements() {
     translist.classList.remove("hide");
     balance.classList.remove("hide");
     progress.classList.remove("hide");
+    clearLocal.classList.remove("hide");
 }
 
 function showProduct() {
@@ -67,15 +69,50 @@ let incomeAmmount = document.querySelector('.incomeAmmount');
 let snackBar = document.querySelector('.snackBar');
 let dateIn = document.querySelector(".inputDateIn");
 let dateEx = document.querySelector(".inputDateEx")
+
+
 // Clear all input fields
+var currentDate = new Date();
+// Format the date to the required format (YYYY-MM-DD)
+var year = currentDate.getFullYear();
+var month = String(currentDate.getMonth() + 1).padStart(2, '0');
+var day = String(currentDate.getDate()).padStart(2, '0');
+var formattedDate = year + '-' + month + '-' + day;
+// Set the value of the date input element
+document.getElementById('Date').value = formattedDate;
+document.getElementById('Date1').value = formattedDate;
+// console.log(formattedDate);
+dateIn.addEventListener('change', e => {
+
+    var currentDate = new Date(e.target.value);
+    var year = currentDate.getFullYear();
+    var month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    var day = String(currentDate.getDate()).padStart(2, '0');
+    var formattedDate = year + '-' + month + '-' + day;
+    // Set the value of the date input element
+    document.getElementById('Date').value = formattedDate;
+
+})
+
+dateEx.addEventListener('change', e => {
+    var currentDate = new Date(e.target.value);
+    var year = currentDate.getFullYear();
+    var month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    var day = String(currentDate.getDate()).padStart(2, '0');
+    var formattedDate = year + '-' + month + '-' + day;
+    // Set the value of the date input element
+    document.getElementById('Date1').value = formattedDate;
+})
 
 function clearInputs() {
     productName.value = "";
     productType.value = "";
-    // productCost.value = "";
+    productCost.value = "";
     incomeName.value = "";
     incomeType.value = "";
-    // incomeAmmount.value = "";
+    incomeAmmount.value = "";
+    dateIn.value = formattedDate;
+    dateEx.value = formattedDate;
 }
 //show pop up error
 const showError = (message) => {
@@ -94,7 +131,7 @@ const showError = (message) => {
 function checkInputProduct() {
     let productInput = false;
     if (productType.value.trim() != 0 &&
-        productCost.value.trim() != 0 && dateIn.value != '') {
+        productCost.value.trim() != 0) {
         productInput = true;
     } else {
         productInput = false;
@@ -106,13 +143,24 @@ function checkInputProduct() {
 function checkInputAmmount() {
     let ammountInput = false;
     if (incomeType.value.trim() != 0 &&
-        incomeAmmount.value.trim() < sumIncome() && dateEx.value != '') {
+        incomeAmmount.value.trim() < sumIncome()) {
         ammountInput = true;
     } else {
         ammountInput = false;
         incomeAmmount.classList.add('error')
     }
     return ammountInput;
+}
+
+//delete in local
+
+function deleteData() {
+    const confirmation = confirm('You want to delete all transactions ?');
+    if (confirmation) {
+        localStorage.clear();
+        location.reload();
+        console.log('Deleted data');
+    }
 }
 
 
@@ -124,7 +172,7 @@ function createProduct() {
         name: productName.value,
         pType: productType.value,
         ammount: productCost.value,
-        time: dateIn.value,
+        time: dateIn.value
     }
     return product;
 }
@@ -146,6 +194,7 @@ function updateApp() {
     closeInterface();
     updataBalance();
     displayItems();
+
     // setTimeout(location.reload(), 2000);
 
 }
@@ -199,12 +248,15 @@ function addAmmounts() {
 }
 
 // display items
-
+function format2(n, currency) {
+    return n.toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + currency;
+}
 function displayItems() {
     let taksObj = getStorage();
     let translist = document.querySelector(".translist");
     let html = "";
     taksObj.forEach((item, index) => {
+        // console.log(format2(parseInt(item.ammount), " vnd"));
         html += `<div class="trans">
         <div class="item">
             <div class="iconDetails">
@@ -221,7 +273,7 @@ function displayItems() {
             <div class="iconDetails itemDate">
                 <span style="${item.obj == "income" ?
                 "color:green" : "color:red"}" class="itemPrice">${item.obj == "income" ?
-                    item.ammount + " VND" : item.ammount + " VND"}  </span>
+                    format2(parseInt(item.ammount), " VND") : format2(parseInt(item.ammount), " VND")}  </span>
                 <span class="itemTime">${item.time}</span>
             </div>
         </div>
@@ -285,9 +337,7 @@ function getBalance() {
     return totalBalance;
 }
 
-function format2(n, currency) {
-    return n.toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + currency;
-}
+
 //
 function updataBalance() {
     let totalIncome = sumIncome();
@@ -296,7 +346,6 @@ function updataBalance() {
     let incomeValue = document.querySelector(".incomeValue");
     let expenseValue = document.querySelector(".expenseValue");
     let totalBalVal = document.querySelector(".totalBalVal");
-
     incomeValue.textContent = format2(totalIncome, ' VND');
     expenseValue.textContent = format2(totalExpense, ' VND');
     totalBalVal.textContent = format2(totalBalance, ' VND');
